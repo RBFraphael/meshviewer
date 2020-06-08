@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <div id="viewer">
+        <p id="msg">Go to File > Open 3D File and select a OBJ file to view.</p>
+    </div>
+    <script>
+        if(typeof module === 'object'){
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+
+    <script src="./assets/js/threejs/inflate.min.js"></script>
+    <script src="./assets/js/threejs/three.min.js"></script>
+    <script src="./assets/js/threejs/FBXLoader.js"></script>
+    <script src="./assets/js/threejs/GLTFLoader.js"></script>
+    <script src="./assets/js/threejs/MTLLoader.js"></script>
+    <script src="./assets/js/threejs/OBJLoader.js"></script>
+    <script src="./assets/js/threejs/STLLoader.js"></script>
+    <script src="./assets/js/threejs/OrbitControls.js"></script>
+    <script src="./assets/js/script.js"></script>
+
+    <script>
+        if(window.module){
+            module = window.module;
+        }
+    </script>
+</body>
+</html>

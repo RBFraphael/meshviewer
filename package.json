@@ -1,0 +1,44 @@
+{
+  "name": "meshviewer",
+  "version": "1.0.0",
+  "description": "3D viewer for Linux",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rbfraphael/meshviewer.git"
+  },
+  "author": {
+    "name": "RBFraphael",
+    "email": "rbfraphael@gmail.com",
+    "url": "https://rbfraphael.com.br"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rbfraphael/meshviewer/issues"
+  },
+  "homepage": "https://github.com/rbfraphael/meshviewer#readme",
+  "devDependencies": {
+    "electron": "^9.0.2",
+    "electron-builder": "^22.7.0"
+  },
+  "dependencies": {},
+  "build": {
+    "appId": "net.rbfstudio.meshviewer",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "category": "Graphics,Utility",
+      "desktop": {
+        "Name": "Mesh Viewer"
+      }
+    },
+    "icon": "src/icon.icns"
+  }
+}
