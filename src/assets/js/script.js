@@ -3,6 +3,20 @@ const events = require('electron').ipcRenderer;
 var threejs_renderers = [];
 var viewer = document.getElementById("viewer");
 
+viewer.ondragover = () => { return false; }
+viewer.ondragleave = () => { return false; }
+viewer.ondragend = () => { return false; }
+viewer.ondrop = (e) => {
+    e.preventDefault();
+    if(e.dataTransfer.files.length > 0){
+        let file = e.dataTransfer.files[0].path;
+        let model = "file://" + encodeURI(file);
+        threejs_renderers = [];
+        viewer.innerHTML = "";
+        ThreeJSBuilder(model, viewer, file.split(".").pop().toUpperCase());
+    }
+}
+
 let args = remote.getGlobal("arguments");
 if(args.length > 1){
     let file = args[1];
@@ -74,7 +88,7 @@ function ThreeJSBuilder(object, element, type)
                 cameraToObject(obj, camera, controls);
             }, (load) => {}, (error) => {
                 alert("Unsupported FBX file");
-                viewer.innerHTML = "<p id=\"msg\">Go to File > Open 3D File and select a OBJ file to view.</p>";
+                viewer.innerHTML = "<p id=\"msg\">Drag & drop OBJ or FBX file here<br>Press <strong>Ctrl + O</strong> and select OBJ or FBX file<br>Go to <strong>File > Open 3D File<strong> and select OBJ or FBX file</p>";
             });
         break;
         case "OBJ":
@@ -89,7 +103,13 @@ function ThreeJSBuilder(object, element, type)
                     obj.position.set(0, 0, 0);
                     scene.add(obj);
                     cameraToObject(obj, camera, controls);
+                }, (load) => {}, (error) => {
+                    alert("Unsupported OBJ file");
+                    viewer.innerHTML = "<p id=\"msg\">Drag & drop OBJ or FBX file here<br>Press <strong>Ctrl + O</strong> and select OBJ or FBX file<br>Go to <strong>File > Open 3D File<strong> and select OBJ or FBX file</p>";
                 });
+            }, (load) => {}, (error) => {
+                alert("Unsupported MTL file");
+                viewer.innerHTML = "<p id=\"msg\">Drag & drop OBJ or FBX file here<br>Press <strong>Ctrl + O</strong> and select OBJ or FBX file<br>Go to <strong>File > Open 3D File<strong> and select OBJ or FBX file</p>";
             });
         break;
         case "GLTF":
@@ -100,7 +120,7 @@ function ThreeJSBuilder(object, element, type)
                 cameraToObject(obj, camera, controls);
             }, (load) => {}, (error) => {
                 alert("Unsupported GLTF file.");
-                viewer.innerHTML = "<p id=\"msg\">Go to File > Open 3D File and select a OBJ file to view.</p>";
+                viewer.innerHTML = "<p id=\"msg\">Drag & drop OBJ or FBX file here<br>Press <strong>Ctrl + O</strong> and select OBJ or FBX file<br>Go to <strong>File > Open 3D File<strong> and select OBJ or FBX file</p>";
             });
         break;
         case "STL":
@@ -111,15 +131,17 @@ function ThreeJSBuilder(object, element, type)
                 cameraToObject(obj, camera, controls);
             }, (load) => {}, (error) => {
                 alert("Unsupported GLTF file.");
-                viewer.innerHTML = "<p id=\"msg\">Go to File > Open 3D File and select a OBJ file to view.</p>";
+                viewer.innerHTML = "<p id=\"msg\">Drag & drop OBJ or FBX file here<br>Press <strong>Ctrl + O</strong> and select OBJ or FBX file<br>Go to <strong>File > Open 3D File<strong> and select OBJ or FBX file</p>";
             });
         break;
         default:
             alert("Unsupported file type");
-            viewer.innerHTML = "<p id=\"msg\">Go to File > Open 3D File and select a OBJ file to view.</p>";
+            viewer.innerHTML = "<p id=\"msg\">Drag & drop OBJ or FBX file here<br>Press <strong>Ctrl + O</strong> and select OBJ or FBX file<br>Go to <strong>File > Open 3D File<strong> and select OBJ or FBX file</p>";
             return;
         break;
     }
+
+    // console.log(renderer.info.render);
 
     threejs_renderers.push({
         camera: camera,

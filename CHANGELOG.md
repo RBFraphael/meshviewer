@@ -1,4 +1,8 @@
 # Changelog
+## 1.0.2
+- Added "Drag & Drop" functionality
+- Changed initial page text
+
 ## 1.0.1
 - Added gradient background
 - Removed "Toggle Developer Tools" from Help menu

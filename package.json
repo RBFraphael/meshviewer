@@ -1,6 +1,6 @@
 {
   "name": "meshviewer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "3D viewer for Linux",
   "main": "main.js",
   "scripts": {
@@ -30,7 +30,11 @@
   "build": {
     "appId": "net.rbfstudio.meshviewer",
     "mac": {
-      "category": "public.app-category.utilities"
+      "category": "public.app-category.utilities",
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
     },
     "linux": {
       "target": ["AppImage", "deb"],
