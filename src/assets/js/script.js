@@ -5,7 +5,6 @@ var viewer = document.getElementById("viewer");
 
 let args = remote.getGlobal("arguments");
 if(args.length > 1){
-    console.log(args);
     let file = args[1];
     let model = "file://" + encodeURI(file);
     threejs_renderers = [];
@@ -44,7 +43,7 @@ function ThreeJSBuilder(object, element, type)
     light.position.set(0, 200, 0);
     scene.add(light);
 
-    light = new THREE.DirectionalLight( 0xffffff );
+    light = new THREE.DirectionalLight(0xffffff, 0.5);
     light.position.set( 0, 200, 100 );
     light.castShadow = true;
     light.shadow.camera.top = 180;
@@ -52,48 +51,6 @@ function ThreeJSBuilder(object, element, type)
     light.shadow.camera.left = - 120;
     light.shadow.camera.right = 120;
     scene.add(light);
-
-    switch(type){
-        case "FBX":
-            var loader = new THREE.FBXLoader();
-            loader.load(object, function(obj){
-                obj.position.set(0, 0, 0);
-                scene.add(obj);
-            });
-        break;
-        case "OBJ":
-            let path = object.split("/");
-            path.pop();
-            path = path.join("/") + "/";
-            let objFile = object.split("/").pop();
-            let mtlFile = objFile.split(".")[0] + ".mtl";
-            new THREE.MTLLoader().setPath(path).load(mtlFile, (materials) => {
-                materials.preload();
-                new THREE.OBJLoader().setMaterials(materials).setPath(path).load(objFile, (obj) => {
-                    obj.position.set(0, 0, 0);
-                    scene.add(obj);
-                });
-            });
-        break;
-        case "GLTF":
-            var loader = new THREE.GLTFLoader();
-            loader.load(object, function(obj){
-                obj.position.set(0, 0, 0);
-                scene.add(obj);
-            });
-        break;
-        case "STL":
-            var loader = new THREE.STLLoader();
-            loader.load(object, function(obj){
-                obj.position.set(0, 0, 0);
-                scene.add(obj);
-            });
-        break;
-        default:
-            alert("Unsupported file type");
-            return;
-        break;
-    }
 
     renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -108,6 +65,61 @@ function ThreeJSBuilder(object, element, type)
     controls.enableDamping = true;
     controls.enablePan = true;
     controls.update();
+
+    switch(type){
+        case "FBX":
+            new THREE.FBXLoader().load(object, (obj) => {
+                obj.position.set(0, 0, 0);
+                scene.add(obj);
+                cameraToObject(obj, camera, controls);
+            }, (load) => {}, (error) => {
+                alert("Unsupported FBX file");
+                viewer.innerHTML = "<p id=\"msg\">Go to File > Open 3D File and select a OBJ file to view.</p>";
+            });
+        break;
+        case "OBJ":
+            let path = object.split("/");
+            path.pop();
+            path = path.join("/") + "/";
+            let objFile = object.split("/").pop();
+            let mtlFile = objFile.split(".")[0] + ".mtl";
+            new THREE.MTLLoader().setPath(path).load(mtlFile, (materials) => {
+                materials.preload();
+                new THREE.OBJLoader().setMaterials(materials).setPath(path).load(objFile, (obj) => {
+                    obj.position.set(0, 0, 0);
+                    scene.add(obj);
+                    cameraToObject(obj, camera, controls);
+                });
+            });
+        break;
+        case "GLTF":
+            var loader = new THREE.GLTFLoader();
+            loader.load(object, function(obj){
+                obj.position.set(0, 0, 0);
+                scene.add(obj);
+                cameraToObject(obj, camera, controls);
+            }, (load) => {}, (error) => {
+                alert("Unsupported GLTF file.");
+                viewer.innerHTML = "<p id=\"msg\">Go to File > Open 3D File and select a OBJ file to view.</p>";
+            });
+        break;
+        case "STL":
+            var loader = new THREE.STLLoader();
+            loader.load(object, function(obj){
+                obj.position.set(0, 0, 0);
+                scene.add(obj);
+                cameraToObject(obj, camera, controls);
+            }, (load) => {}, (error) => {
+                alert("Unsupported GLTF file.");
+                viewer.innerHTML = "<p id=\"msg\">Go to File > Open 3D File and select a OBJ file to view.</p>";
+            });
+        break;
+        default:
+            alert("Unsupported file type");
+            viewer.innerHTML = "<p id=\"msg\">Go to File > Open 3D File and select a OBJ file to view.</p>";
+            return;
+        break;
+    }
 
     threejs_renderers.push({
         camera: camera,
@@ -138,4 +150,28 @@ function ThreeJSResize()
 
         obj.renderer.setSize(width, height);
     });
+}
+
+function cameraToObject(obj, camera, controls, offset = 1.2)
+{
+    var box = new THREE.Box3().setFromObject(obj);
+    var size = box.getSize(new THREE.Vector3());
+    var center = box.getCenter(new THREE.Vector3());
+
+    var maxSize = Math.max(size.x, size.y, size.z);
+    var heightDistance = maxSize / (2 * Math.atan(Math.PI * camera.fov / 360));
+    var widthDistance = heightDistance / camera.aspect;
+    var distance = offset * Math.max(heightDistance, widthDistance);
+
+    var direction = controls.target.clone().sub(camera.position).normalize().multiplyScalar(distance);
+
+    controls.maxDistance = distance * 10;
+    controls.target.copy(center);
+
+    camera.near = distance / 100;
+    camera.far = distance * 100;
+    camera.updateProjectionMatrix();
+
+    camera.position.copy(controls.target).sub(direction);
+    controls.update();
 }

@@ -1,6 +1,6 @@
 {
   "name": "meshviewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "3D viewer for Linux",
   "main": "main.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "email": "rbfraphael@gmail.com",
     "url": "https://rbfraphael.com.br"
   },
-  "license": "MIT",
+  "license": "GPL",
   "bugs": {
     "url": "https://github.com/rbfraphael/meshviewer/issues"
   },

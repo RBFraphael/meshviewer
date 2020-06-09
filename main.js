@@ -21,13 +21,33 @@ function createWindow()
             submenu: [
                 {
                     label: "Open 3D File",
+                    accelerator: "CommandOrControl+O",
                     click: () => {
                         dialog.showOpenDialog({
                             title: "Select an 3D file",
-                            filters: [{
-                                name: 'OBJ File with MTL',
-                                extensions: ['obj']
-                            }],
+                            filters: [
+                                {
+                                    name: 'All supported files',
+                                    // extensions: ['obj', 'fbx', 'gltf', 'stl']
+                                    extensions: ['obj', 'fbx']
+                                },
+                                {
+                                    name: 'OBJ File with MTL',
+                                    extensions: ['obj']
+                                },
+                                {
+                                    name: "FBX File",
+                                    extensions: ['fbx'],
+                                },
+                                // {
+                                //     name: "GLTF File",
+                                //     extensions: ['gltf']
+                                // },
+                                // {
+                                //     name: "STL File",
+                                //     extensions: ['stl'],
+                                // }
+                            ],
                             properties: ['openFile']
                         }).then(result => {
                             if(result.filePaths.length > 0){
@@ -46,10 +66,10 @@ function createWindow()
         {
             label: "Help",
             submenu: [
-                {
-                    label: "Toggle Developer Tools",
-                    role: "toggleDevTools"
-                },
+                // {
+                //     label: "Toggle Developer Tools",
+                //     role: "toggleDevTools"
+                // },
                 {
                     label: "GitHub Repository",
                     click: () => {
@@ -60,7 +80,7 @@ function createWindow()
                     label: "About",
                     click: () => {
                         let msg = "Created by: RBFraphael (rbfraphael.com.br)";
-                        msg += "\nVersion: 0.1.0";
+                        msg += "\nVersion: 1.0.1";
                         msg += "\nRepository: github.com/rbfraphael/meshviewer";
                         dialog.showMessageBox(win, {
                             title: "About Mesh Viewer",

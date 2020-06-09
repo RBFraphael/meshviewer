@@ -6,7 +6,8 @@
 }
 
 html, body{
-    background-color: gray;
+    /* background-color: gray; */
+    background-image: url("../img/background.png");
 }
 
 #viewer{
