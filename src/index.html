@@ -6,8 +6,12 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+    <div id="mesh-status" style="display:none;">
+        <p><strong>File: </strong><span id="filename"></span></p>
+        <p><strong>Triangles: </strong><span id="triangles"></span></p>
+    </div>
     <div id="viewer">
-        <p id="msg">Drag & drop OBJ or FBX file here<br>Press <strong>Ctrl + O</strong> and select OBJ or FBX file<br>Go to <strong>File > Open 3D File<strong> and select OBJ or FBX file</p>
+        <p id="msg">Drag & drop 3D file here<br>Press <strong>Ctrl + O</strong> and select 3D file<br>Go to <strong>File > Open 3D File<strong> and select 3D file<br><br>Supported 3D files: FBX, OBJ, GLTF, GLB</p>
     </div>
     <script>
         if(typeof module === 'object'){

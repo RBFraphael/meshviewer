@@ -28,8 +28,7 @@ function createWindow()
                             filters: [
                                 {
                                     name: 'All supported files',
-                                    // extensions: ['obj', 'fbx', 'gltf', 'stl']
-                                    extensions: ['obj', 'fbx']
+                                    extensions: ['obj', 'fbx', 'gltf', 'glb']
                                 },
                                 {
                                     name: 'OBJ File with MTL',
@@ -39,10 +38,10 @@ function createWindow()
                                     name: "FBX File",
                                     extensions: ['fbx'],
                                 },
-                                // {
-                                //     name: "GLTF File",
-                                //     extensions: ['gltf']
-                                // },
+                                {
+                                    name: "GLTF File",
+                                    extensions: ['gltf', 'glb']
+                                },
                                 // {
                                 //     name: "STL File",
                                 //     extensions: ['stl'],
@@ -80,7 +79,7 @@ function createWindow()
                     label: "About",
                     click: () => {
                         let msg = "Created by: RBFraphael (rbfraphael.com.br)";
-                        msg += "\nVersion: 1.0.2";
+                        msg += "\nVersion: 1.0.3";
                         msg += "\nRepository: github.com/rbfraphael/meshviewer";
                         dialog.showMessageBox(win, {
                             title: "About Mesh Viewer",
