@@ -1,14 +1,15 @@
 # Mesh Viewer
-A simple, easy to use, 3D file viewer for Linux, buit using Electron and ThreeJS.
+A simple, easy to use, 3D file viewer for Linux and Windows, buit using Electron and ThreeJS.
 
 ## Features
-- AppImage and DEB Package available for download
-- Easy open FBX and OBJ files
+- AppImage and DEB Package available for Linux
+- Portable EXE and installer available for Windows
+- Easy open FBX, OBJ, GLTF and GLB files
 
 ## Compiling yourself
 meshviewer uses electron-builder for building end-user binaries
-- ```npm install```
-- ```npm run dist```
+1. Run ```npm install``` for installing all dependencies
+2. Run ```npm run dist``` for building binaries for your current platform
 
 ## Download
 https://github.com/RBFraphael/meshviewer/releases
