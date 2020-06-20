@@ -11,6 +11,7 @@ setupDragAndDrop();
 setupOpenEvent();
 setupRendererBehaviour();
 loadFromArguments();
+setTextsByOs();
 
 /**
  * Setup drag and drop functionality
@@ -266,4 +267,18 @@ function setStatus(file)
     document.getElementById("filename").innerText = path.basename(file);
     document.getElementById("triangles").innerText = renderer.info.render.triangles
     document.getElementById("mesh-status").style.display = "block";
+}
+
+/**
+ * Set initial message texts based on operating system
+ */
+function setTextsByOs()
+{
+    if(remote.process.platform == "darwin"){
+        document.getElementById("open-shortcut").innerText = "Cmd + O";
+        document.getElementById("open-path").innerText = "Mesh Viewer > Open 3D File";
+    } else {
+        document.getElementById("open-shortcut").innerText = "Ctrl + O";
+        document.getElementById("open-path").innerText = "File > Open 3D File";
+    }
 }

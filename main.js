@@ -15,6 +15,17 @@ function createWindow()
         icon: __dirname + "/src/icon.png"
     });
 
+    if(app.requestSingleInstanceLock()){
+        app.on("second-instance", (e, args, dir) => {
+            if(args.length > 1){
+                file = args[1];
+                win.webContents.send("open", file);
+            }
+        });
+    } else {
+        app.quit();
+    }
+
     var menu = [
         {
             label: "File",
@@ -79,7 +90,7 @@ function createWindow()
                     label: "About",
                     click: () => {
                         let msg = "Created by: RBFraphael (rbfraphael.com.br)";
-                        msg += "\nVersion: 1.0.3";
+                        msg += "\nVersion: 1.0.4";
                         msg += "\nRepository: github.com/rbfraphael/meshviewer";
                         dialog.showMessageBox(win, {
                             title: "About Mesh Viewer",

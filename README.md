@@ -1,10 +1,11 @@
 # Mesh Viewer
-A simple, easy to use, 3D file viewer for Linux and Windows, buit using Electron and ThreeJS.
+A simple, easy to use, 3D file viewer for Linux, macOS and Windows, buit using Electron and ThreeJS.
 
 ![Meshviewer Preview](https://raw.githubusercontent.com/RBFraphael/meshviewer/master/preview.gif)
 
 ## Features
 - AppImage and DEB Package available for Linux
+- DMG image available for macOS
 - Portable EXE and installer available for Windows
 - Easy open FBX, OBJ, GLTF and GLB files
 

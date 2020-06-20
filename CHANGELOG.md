@@ -1,4 +1,9 @@
 # Changelog
+## 1.0.4
+- Added one-instance functionality
+- Custom initial message based on operating system
+- Initial setup for macOS builds
+
 ## 1.0.3
 - Fully rewriten script.js (core script)
 - Core script more flexible for future updates

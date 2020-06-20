@@ -1,6 +1,6 @@
 {
   "name": "meshviewer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "3D viewer for Linux",
   "main": "main.js",
   "scripts": {
@@ -34,11 +34,19 @@
       "target": "dmg"
     },
     "win": {
-      "target": ["nsis", "portable", "appx", "msi"],
+      "target": [
+        "nsis",
+        "portable",
+        "appx",
+        "msi"
+      ],
       "icon": "src/icon.ico"
     },
     "linux": {
-      "target": ["AppImage", "deb"],
+      "target": [
+        "AppImage",
+        "deb"
+      ],
       "category": "Graphics;3DGraphics;Utility",
       "desktop": {
         "Name": "Mesh Viewer"
