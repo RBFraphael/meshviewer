@@ -58,26 +58,22 @@
       {
         "ext": "fbx",
         "name": "FBX File",
-        "role": "Viewer",
-        "perMachine": true
+        "role": "Viewer"
       },
       {
         "ext": "obj",
         "name": "OBJ (+MTL) File",
-        "role": "Viewer",
-        "perMachine": true
+        "role": "Viewer"
       },
       {
         "ext": "gltf",
         "name": "GLTF File",
-        "role": "Viewer",
-        "perMachine": true
+        "role": "Viewer"
       },
       {
         "ext": "glb",
         "name": "GLB File",
-        "role": "Viewer",
-        "perMachine": true
+        "role": "Viewer"
       }
     ]
   }
