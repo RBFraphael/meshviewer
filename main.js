@@ -20,6 +20,7 @@ function createWindow()
             if(args.length > 1){
                 file = args[1];
                 win.webContents.send("open", file);
+                win.focus();
             }
         });
     } else {
@@ -90,7 +91,7 @@ function createWindow()
                     label: "About",
                     click: () => {
                         let msg = "Created by: RBFraphael (rbfraphael.com.br)";
-                        msg += "\nVersion: 1.0.4";
+                        msg += "\nVersion: 1.0.5";
                         msg += "\nRepository: github.com/rbfraphael/meshviewer";
                         dialog.showMessageBox(win, {
                             title: "About Mesh Viewer",

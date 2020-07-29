@@ -1,4 +1,8 @@
 # Changelog
+## 1.0.5
+- Added file associations
+- Auto focus when opening file within already opened window
+
 ## 1.0.4
 - Added one-instance functionality
 - Custom initial message based on operating system

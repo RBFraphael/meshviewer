@@ -1,6 +1,6 @@
 {
   "name": "meshviewer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "3D viewer for Linux",
   "main": "main.js",
   "scripts": {
@@ -53,6 +53,32 @@
       }
     },
     "productName": "Mesh Viewer",
-    "icon": "src/icon.icns"
+    "icon": "src/icon.icns",
+    "fileAssociations": [
+      {
+        "ext": "fbx",
+        "name": "FBX File",
+        "role": "Viewer",
+        "perMachine": true
+      },
+      {
+        "ext": "obj",
+        "name": "OBJ (+MTL) File",
+        "role": "Viewer",
+        "perMachine": true
+      },
+      {
+        "ext": "gltf",
+        "name": "GLTF File",
+        "role": "Viewer",
+        "perMachine": true
+      },
+      {
+        "ext": "glb",
+        "name": "GLB File",
+        "role": "Viewer",
+        "perMachine": true
+      }
+    ]
   }
 }
