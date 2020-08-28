@@ -1,6 +1,6 @@
 {
   "name": "meshviewer",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "3D viewer for Linux",
   "main": "main.js",
   "scripts": {
@@ -37,7 +37,6 @@
       "target": [
         "nsis",
         "portable",
-        "appx",
         "msi"
       ],
       "icon": "src/icon.ico"

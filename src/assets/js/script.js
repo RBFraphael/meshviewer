@@ -1,7 +1,7 @@
 const remote = require('electron').remote;
 const events = require('electron').ipcRenderer;
-const pathb = require('path');
-const path = remote.process.platform == "win32" ? pathb.win32 : pathb.posix;
+const _path = require('path');
+const path = remote.process.platform == "win32" ? _path.win32 : _path.posix;
 
 var supportedExtensions = ["OBJ", "FBX", "GLTF", "GLB"];
 var viewer = document.getElementById("viewer");
@@ -72,7 +72,11 @@ function loadFile(file)
 {
     let filePath = "file://" + file;
     let fileExtension = filePath.split(".").pop().toUpperCase();
-    renderFile(filePath, fileExtension);
+    if(["png", "jpg", "jpeg"].includes(fileExtension.toLowerCase())){
+        setTexture(filePath);
+    } else {
+        renderFile(filePath, fileExtension);
+    }
 }
 
 /**
@@ -255,6 +259,44 @@ function fixMaterials(object)
 
     object.children.forEach((obj) => {
         fixMaterials(obj);
+    });
+}
+
+/**
+ * Loads a texture and call function to set texture in all materials
+ * @param {String} file Texture file path
+ */
+function setTexture(file)
+{
+    if(typeof(scene) != "undefined"){
+        let loader = new THREE.TextureLoader();
+        loader.load(file, (texture) => {
+            setObjectTexture(texture);
+        });
+    } else {
+        alert("Open a 3D file before adding textures.");
+    }
+}
+
+/**
+ * Set texture in all materials and children's materials
+ * @param {Texture} texture Texture to apply
+ * @param {Object3D} object Object will receive texture
+ */
+function setObjectTexture(texture, object = scene)
+{
+    if(typeof(object.material) != "undefined"){
+        if(Array.isArray(object.material)){
+            object.material.forEach((mat) => {
+                mat.map = texture;
+            });
+        } else {
+            object.material.map = texture;
+        }
+    }
+
+    object.children.forEach((child) => {
+        setObjectTexture(texture, child);
     });
 }
 

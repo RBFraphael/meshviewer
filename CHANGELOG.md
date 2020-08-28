@@ -1,4 +1,8 @@
 # Changelog
+## 1.0.6
+- Added support for loading an image file as texture
+- Removed Windows' APPX option from builds in package.json
+
 ## 1.0.5
 - Added file associations
 - Auto focus when opening file within already opened window

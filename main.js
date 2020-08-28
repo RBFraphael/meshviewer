@@ -32,7 +32,7 @@ function createWindow()
             label: "File",
             submenu: [
                 {
-                    label: "Open 3D File",
+                    label: "Open File",
                     accelerator: "CommandOrControl+O",
                     click: () => {
                         dialog.showOpenDialog({
@@ -40,7 +40,7 @@ function createWindow()
                             filters: [
                                 {
                                     name: 'All supported files',
-                                    extensions: ['obj', 'fbx', 'gltf', 'glb']
+                                    extensions: ['obj', 'fbx', 'gltf', 'glb', 'jpg', 'jpeg', 'png']
                                 },
                                 {
                                     name: 'OBJ File with MTL',
@@ -54,6 +54,10 @@ function createWindow()
                                     name: "GLTF File",
                                     extensions: ['gltf', 'glb']
                                 },
+                                {
+                                    name: "Image (Texture) File",
+                                    extensions: ['jpg', 'jpeg', 'png'],
+                                }
                                 // {
                                 //     name: "STL File",
                                 //     extensions: ['stl'],
@@ -91,7 +95,7 @@ function createWindow()
                     label: "About",
                     click: () => {
                         let msg = "Created by: RBFraphael (rbfraphael.com.br)";
-                        msg += "\nVersion: 1.0.5";
+                        msg += "\nVersion: 1.0.6";
                         msg += "\nRepository: github.com/rbfraphael/meshviewer";
                         dialog.showMessageBox(win, {
                             title: "About Mesh Viewer",
