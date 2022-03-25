@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/rbfraphael/meshviewer#readme",
   "devDependencies": {
-    "electron": "^9.0.2",
+    "electron": "^13.6.6",
     "electron-builder": "^22.7.0"
   },
   "dependencies": {},
